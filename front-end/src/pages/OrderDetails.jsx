@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SubCard from '../component/SubCard';
+import '../styles/orderDetail.css';
 import { requestGet, requestPut, setToken } from '../service/request';
 
 const OrderDetails = () => {
@@ -51,8 +52,40 @@ const OrderDetails = () => {
     });
   };
   return (
-    <div>
-      <div>
+    <div className="order">
+      <div className="containerSubCard">
+        <div className="subCard">
+          <span className="a">Item</span>
+          <span className="b">Descrição</span>
+          <span className="c">Quantidade</span>
+          <span className="d">Valor Unitario</span>
+          <span className="e">Sub-Total</span>
+        </div>
+      </div>
+      <div className="schrollD containerSubCard">
+        {
+          filteredProducts
+            && filteredProducts.map(({ id: productId, name, price, quantity }, index) => (
+              <SubCard
+                key={ productId }
+                id={ index }
+                name={ name }
+                quantity={ quantity }
+                valueU={ price.toString().replace('.', ',') }
+                sub={ (price * quantity).toFixed(2).replace('.', ',') }
+                pr="order_details"
+              />
+            ))
+        }
+      </div>
+      <div className="totalPrice">
+        <span>{'Total R$: '}</span>
+        <span data-testid={ `${prefix}element-order-total-price` }>
+          { order && typeof order.totalPrice === 'string'
+              && order.totalPrice.replace('.', ',') }
+        </span>
+      </div>
+      <div className="orderDetail">
         <span
           data-testid={ `${prefix}element-order-details-label-order-id` }
         >
@@ -81,38 +114,6 @@ const OrderDetails = () => {
         >
           MARCAR COMO ENTREGUE
         </button>
-      </div>
-      <div>
-        <div className="containerSubCard">
-          <div className="subCard">
-            <span className="a">Item</span>
-            <span className="b">Descrição</span>
-            <span className="c">Quantidade</span>
-            <span className="d">Valor Unitario</span>
-            <span className="e">Sub-Total</span>
-          </div>
-        </div>
-        {
-          filteredProducts
-            && filteredProducts.map(({ id: productId, name, price, quantity }, index) => (
-              <SubCard
-                key={ productId }
-                id={ index }
-                name={ name }
-                quantity={ quantity }
-                valueU={ price.toString().replace('.', ',') }
-                sub={ (price * quantity).toFixed(2).replace('.', ',') }
-                pr="order_details"
-              />
-            ))
-        }
-        <div className="totalPrice">
-          <span>{'Total R$: '}</span>
-          <span data-testid={ `${prefix}element-order-total-price` }>
-            { order && typeof order.totalPrice === 'string'
-              && order.totalPrice.replace('.', ',') }
-          </span>
-        </div>
       </div>
     </div>
   );

@@ -1,0 +1,31 @@
+.orderDetail {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 20px;
+  justify-content: center;
+  width: 90%;
+}
+
+.orderDetail span {
+  margin: 10px;
+}
+
+.orderDetail button {
+  border: none;
+  bottom: 2vh;
+  height: 50px;
+  position: absolute;
+}
+
+.close {
+  border: none;
+  font-size: 30px;
+  margin-left: 90%;
+  margin-top: 10px;
+}
+
+.schrollD {
+  height: 65vh;
+  overflow-y: scroll;
+}
