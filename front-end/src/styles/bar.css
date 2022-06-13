@@ -51,10 +51,9 @@ h2 {
 .container2 {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-left: 2.5%;
+  margin-left: 5.5%;
   margin-top: 67px;
-  width: 95%;
+  width: 89%;
 }
 
 .segredo {
