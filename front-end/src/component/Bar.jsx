@@ -2,12 +2,13 @@ import '../styles/bar.css';
 import '../styles/cart.css';
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Cart from '../pages/Cart';
 import Order from '../pages/Order';
 import CustomerContext from '../context/CustomerContext';
 import * as path from '../utils/paths';
 import { requestGet, setToken } from '../service/request';
+import OrderDetails from '../pages/OrderDetails';
 
 const Bar = ({ roles }) => {
   const {
@@ -17,11 +18,14 @@ const Bar = ({ roles }) => {
     setModalCart,
     modalOrder,
     setModalOrder,
+    modalOrderDet,
+    setModalOrderDet,
   } = useContext(CustomerContext);
 
   const user = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const location = useLocation();
+  const { id } = useParams();
 
   useEffect(() => {
     const url = location.pathname;
@@ -29,6 +33,8 @@ const Bar = ({ roles }) => {
     if (url !== path.checkout) setModalCart(false);
     if (url === path.orderCustomer) setModalOrder(true);
     if (url !== path.orderCustomer) setModalOrder(false);
+    if (url === `/customer/orders/${id}`) setModalOrderDet(true);
+    if (url !== `/customer/orders/${id}`) setModalOrderDet(false);
   });
 
   useEffect(() => {
@@ -89,7 +95,8 @@ const Bar = ({ roles }) => {
       </button>
       {modalCart && <Cart />}
       {modalOrder && <Order />}
-      {(modalCart || modalOrder) && (
+      {modalOrderDet && <OrderDetails />}
+      {(modalCart || modalOrder || modalOrderDet) && (
         <button onClick={ close } className="blur" type="button">
           {' '}
         </button>
