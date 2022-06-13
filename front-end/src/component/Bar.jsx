@@ -48,7 +48,6 @@ const Bar = ({ roles }) => {
   };
 
   const toCart = () => navigate(path.checkout);
-  const toProducts = () => navigate(path.product);
   const toOrder = () => (roles ? navigate(path.sellerDetails)
     : navigate(path.orderCustomer));
   const close = () => navigate(path.product);
@@ -62,13 +61,6 @@ const Bar = ({ roles }) => {
       </button>
       <div className="bar">
         <button
-          data-testid="customer_products__element-navbar-link-products"
-          type="button"
-          onClick={ toProducts }
-        >
-          Produtos
-        </button>
-        <button
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
           onClick={ toOrder }
@@ -80,7 +72,6 @@ const Bar = ({ roles }) => {
           type="button"
           className={ `${modalCart} carrinho` }
           onClick={ toCart }
-          disabled={ totalPrice === '0.00' }
         >
           <span>Ver Carrinho: R$:</span>
           <span data-testid="customer_products__checkout-bottom-value">
