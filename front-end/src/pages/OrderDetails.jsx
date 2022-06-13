@@ -9,8 +9,6 @@ const OrderDetails = () => {
   const [order, setOrder] = useState({});
   const [productList, setProductList] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  // const [disabled, setDisabled] = useState(true);
-
   const { id } = useParams();
   const prefix = 'customer_order_details__';
 

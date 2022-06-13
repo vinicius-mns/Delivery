@@ -4,14 +4,6 @@ import CustomerContext from '../context/CustomerContext';
 import { requestGet, setToken } from '../service/request';
 import '../styles/order.css';
 
-// const pedidos = [
-//   { order: 1, status: 'Pendente', totalPrice, saleDate },
-// ];
-
-// const coisa = (event) => {
-//   event.currentTarget.classList.toggle('fullSize');
-// };
-
 const Order = () => {
   const { orders, setOrders } = useContext(CustomerContext);
 

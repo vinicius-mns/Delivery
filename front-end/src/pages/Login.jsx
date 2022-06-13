@@ -12,11 +12,9 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [invalid, setInvalid] = useState(false);
-  // const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('user')) navigate('/customer/products');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const login = async (event) => {

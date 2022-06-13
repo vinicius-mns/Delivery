@@ -3,15 +3,6 @@ import CardOrder from '../component/CardOrder';
 import CustomerContext from '../context/CustomerContext';
 import { requestGet, setToken } from '../service/request';
 import Bar from '../component/Bar';
-// import '../styles/order.css';
-
-// const pedidos = [
-//   { order: 1, status: 'Pendente', totalPrice, saleDate },
-// ];
-
-// const coisa = (event) => {
-//   event.currentTarget.classList.toggle('fullSize');
-// };
 
 const SellerOrder = () => {
   const { orders, setOrders } = useContext(CustomerContext);
