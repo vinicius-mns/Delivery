@@ -1,50 +1,71 @@
 {
-  "name": "sd-0x-project-delivery-app",
-  "version": "1.0.0",
-  "description": "\"Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por _Slack_! #vqv 🚀\"",
+  "name": "delivery-app-back-end",
+  "version": "0.1.0",
+  "description": "Front-end do projeto App de Delivery",
   "engines": {
     "node": ">=16.0.0"
   },
   "engineStrict": true,
+  "private": true,
   "scripts": {
-    "pm2": "./node_modules/.bin/pm2",
-    "jest": "./node_modules/.bin/jest",
-    "start": "./scripts/prepare-for-test.sh",
-    "stop": "(pm2 stop all && pm2 delete all) | grep 'PM2'",
-    "dev": "./scripts/prepare-for-dev.sh",
-    "dev:prestart": "./scripts/prestart-dev.sh",
-    "db:reset": "./scripts/reset-db-dev.sh",
-    "db:reset:debug": "./scripts/reset-db-dev-debug.sh",
-    "pretest": "npm start",
-    "test": "jest -i --forceExit --verbose --config=./jest.config.js",
-    "test:dev": "NODE_ENV=development npm run jest -i --forceExit --config=./jest.config.js",
-    "test:dev:open": "NODE_ENV=development HEADLESS=false npm run test:dev",
-    "test:dev:report": "./__tests__/reports/generate.sh"
+    "start": "react-scripts start",
+    "start:build": "PORT=3000 ./node_modules/.bin/serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --runInBand --detectOpenHandles --verbose",
+    "test:coverage": "react-scripts test --coverage",
+    "test:coverage:json": "react-scripts test --coverage --coverageReporters=\"json-summary\" --watchAll=false --testFailureExitCode=0 --detectOpenHandles --runInBand --forceExit",
+    "eject": "react-scripts eject",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input"
   },
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@testing-library/jest-dom": "5.16.2",
+    "@testing-library/react": "12.1.4",
+    "@testing-library/user-event": "13.5.0",
+    "axios": "^0.27.2",
+    "moment": "^2.29.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.0",
+    "serve": "13.0.2",
+    "web-vitals": "2.1.4"
+  },
   "devDependencies": {
-    "@faker-js/faker": "6.0.0",
-    "axios": "0.26.1",
-    "dotenv": "16.0.0",
-    "jest": "27.5.1",
-    "jest-puppeteer": "6.1.0",
-    "jsonwebtoken": "8.5.1",
-    "moment": "2.29.1",
-    "mysql2": "2.3.3",
-    "pm2": "5.2.0",
-    "puppeteer": "13.5.1",
-    "sequelize": "6.17.0",
-    "sequelize-cli": "6.4.1"
+    "eslint-config-trybe-frontend": "1.2.3",
+    "react-router-prop-types": "^1.0.5",
+    "stylelint": "14.6.0",
+    "stylelint-config-standard": "25.0.0",
+    "stylelint-order": "5.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "jest": {
-    "globals": {
-      "__DATABASE__": true,
-      "__COVERAGE__": true,
-      "__REQUIREMENTS__": true,
-      "__TESTID__": true,
-      "__TESTDESC__": true,
-      "__TESTFILE__": true
-    }
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "coveragePathIgnorePatterns": [
+      "index.js",
+      "serviceWorker.js",
+      "reportWebVitals.js",
+      "./services/renderWithRouter",
+      "./services/history"
+    ]
   }
 }
